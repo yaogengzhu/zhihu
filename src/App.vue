@@ -1,57 +1,39 @@
 <template>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
-    <Suspense>
-        <template #default>
-            <async-show />
-        </template>
-        <template #fallback>
-            <h3>loading</h3>
-        </template>
-    </Suspense>
-    <Suspense>
-        <template #default>
-            <DogShow />
-        </template>
-        <template #fallback>
-            <h3>狗狗loading</h3>
-        </template>
-    </Suspense>
-    <h2>{{ error }}</h2>
+    <div class="container">
+        <column-list :list="list"></column-list>
+    </div>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, onErrorCaptured } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
-import AsyncShow from './components/AsyncShow.vue'
-import DogShow from './components/DogShow.vue'
-
+import { defineComponent } from 'vue'
+import 'bootstrap/dist/css/bootstrap.min.css' //引入bootstrapcss
+import ColumnList, { IColumnListProps } from './components/ColumnList.vue'
+const testData: IColumnListProps[] = [
+    {
+        id: 1,
+        title: 'test1',
+        description: '龙风的测试数据',
+        avatar: 'https://avatars.githubusercontent.com/u/42566669?v=4'
+    },
+    {
+        id: 2,
+        title: 'test2',
+        description: '龙风的测试数据2',
+        avatar: 'https://avatars.githubusercontent.com/u/42566669?v=4'
+    },
+]
 export default defineComponent({
     name: 'App',
     components: {
-        HelloWorld,
-        AsyncShow,
-        DogShow,
+        ColumnList
     },
     setup() {
-      const error = ref(null)
-      onErrorCaptured((e: any) => {
-        error.value = e
-      })
-      return {
-        error
-      }
+        return {
+            list: testData,
+        }
     }
 })
 </script>
 
 <style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
 </style>
