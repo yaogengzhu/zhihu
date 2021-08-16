@@ -16,7 +16,17 @@
         <ul v-else class="list-inline mb-0">
             <li class="list-inline-item">
                 <!-- <a href="#" class="btn btn-outline-light my-2">你好:{{user.name}}</a> -->
-                <dropdown :title="`您好${user.name}`"></dropdown>
+                <dropdown :title="`您好${user.name}`">
+                    <dropdown-item>
+                        <a href="#" class="dropdown-item">新建文章</a>
+                    </dropdown-item>
+                    <dropdown-item disabled>
+                        <a href="#" class="dropdown-item">编辑资料</a>
+                    </dropdown-item>
+                    <dropdown-item>
+                        <a href="#" class="dropdown-item">退出登陆</a>
+                    </dropdown-item>
+                </dropdown>
             </li>
         </ul>
     </nav>
@@ -24,6 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import DropdownItem from './DropDownItem.vue'
 import Dropdown from './DropDown.vue'
 
 export interface IUserProps {
@@ -35,7 +46,8 @@ export interface IUserProps {
 export default defineComponent({
     name: 'GlobalHeader',
     components: {
-        Dropdown
+        Dropdown,
+        DropdownItem,
     },
     props: {
         user: {
