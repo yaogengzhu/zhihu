@@ -6,6 +6,11 @@
 - [x] axios
 
 
+## vue3.x新增的特性
+
+- reactive 响应式基础api(返回对象的响应式副本)
+- teleport vue中的传送门 
+
 ## vue 也可以自定义hooks
 ```ts
 import { ref,onMounted,onUnmounted,Ref } from 'vue'
