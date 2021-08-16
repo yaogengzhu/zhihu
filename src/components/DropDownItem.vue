@@ -21,7 +21,7 @@ export default defineComponent({
 .dropdown-option.is-disabled{
     color: #6c757d;
     pointer-events: none;
-    cursor: disabled;
     background-color: transparent;
 }
+
 </style>
