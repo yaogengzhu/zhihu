@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, onMounted, onUnmounted, watch } from 'vue'
+import { ref, defineComponent, watch } from 'vue'
 import useClickOutside from '../hooks/useClickOutside'
 export default defineComponent({
     name: 'Dropdown',
