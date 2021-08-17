@@ -11,6 +11,15 @@
 - reactive 响应式基础api(返回对象的响应式副本)
 - teleport vue中的传送门 
 
+
+- 非 Prop 的 Attribute 的处理
+    - 通过将 inheritAttrs 选项设置为 false (禁用 attribute 继承)
+
+*通过将 inheritAttrs 选项设置为 false，你可以访问组件的 $attrs property，该 property 包括组件 props 和 emits property 中未包含的所有属性 (例如，class、style、v-on 监听器等)。*
+```vue
+<input type="datetime-local" v-bind="$attrs" />
+```
+
 ## vue 也可以自定义hooks
 ```ts
 import { ref,onMounted,onUnmounted,Ref } from 'vue'
