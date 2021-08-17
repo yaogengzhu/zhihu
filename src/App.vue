@@ -3,7 +3,14 @@
         <global-header :user="user"></global-header>
         <!-- <column-list :list="list"></column-list> -->
         <form>
-            <vaildate-input :rules="emailRules"></vaildate-input>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                    >Email address</label
+                >
+                <vaildate-input :rules="emailRules" v-model="emailVal"></vaildate-input>
+                {{ emailVal }}
+            </div>
+
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"
                     >Email address</label
@@ -35,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import 'bootstrap/dist/css/bootstrap.min.css' //引入bootstrapcss
 import ColumnList, { IColumnListProps } from './components/ColumnList.vue'
 import GlobalHeader, { IUserProps } from './components/GlobalHeader.vue'
@@ -80,6 +87,7 @@ export default defineComponent({
         VaildateInput,
     },
     setup() {
+        const emailVal = ref('zhuyaogeng')
         const emailRules: IRulesProp = [
             {
                 type: 'required',
@@ -87,8 +95,8 @@ export default defineComponent({
             },
             {
                 type: 'email',
-                message: '邮箱地址不正确'
-            }
+                message: '邮箱地址不正确',
+            },
         ]
         const emailRef = reactive({
             val: '',
@@ -107,7 +115,8 @@ export default defineComponent({
             user: currentUser,
             emailRef,
             vaildateEmail,
-            emailRules
+            emailRules,
+            emailVal
         }
     },
 })

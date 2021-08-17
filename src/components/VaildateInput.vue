@@ -4,8 +4,9 @@
             type="text"
             class="form-control"
             :class="{'is-invalid': inputRef.error}"
-            v-model="inputRef.val"
+            :value="inputRef.val"
             @blur="vaildateEmail"
+            @input="updateValue"
         />
         <span class="invalid-feedback" v-if="inputRef.error">
             {{ inputRef.message }}
@@ -25,13 +26,19 @@ export default defineComponent({
     name: 'VaildateInput',
     props: {
         rules: Array as PropType<IRulesProp>,
+        modelValue: String
     },
-    setup(props) {
+    setup(props, context) {
         const inputRef = reactive({
-            val: '',
+            val: props.modelValue || '',
             error: false,
             message: '',
         })
+        const updateValue = (e: KeyboardEvent) => {
+            const targetValue = (e.target as HTMLInputElement).value
+            inputRef.val = targetValue
+            context.emit('update:modelValue', targetValue)
+        }
         const vaildateEmail = () => {
             if (props.rules) {
                 const allPassed = props.rules.every((rule) => {
@@ -54,6 +61,7 @@ export default defineComponent({
         return {
             inputRef,
             vaildateEmail,
+            updateValue
         }
     },
 })
