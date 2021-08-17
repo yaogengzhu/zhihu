@@ -7,7 +7,12 @@
                 <label for="exampleInputEmail1" class="form-label"
                     >Email address</label
                 >
-                <vaildate-input :rules="emailRules" v-model="emailVal"></vaildate-input>
+                <vaildate-input
+                    :rules="emailRules"
+                    v-model="emailVal"
+                    class="demo"
+                    placeholder="请输入邮箱地址"
+                />
                 {{ emailVal }}
             </div>
 
@@ -87,7 +92,7 @@ export default defineComponent({
         VaildateInput,
     },
     setup() {
-        const emailVal = ref('zhuyaogeng')
+        const emailVal = ref('')
         const emailRules: IRulesProp = [
             {
                 type: 'required',
@@ -116,7 +121,7 @@ export default defineComponent({
             emailRef,
             vaildateEmail,
             emailRules,
-            emailVal
+            emailVal,
         }
     },
 })

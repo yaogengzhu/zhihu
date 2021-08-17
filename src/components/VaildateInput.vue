@@ -1,12 +1,12 @@
 <template>
     <div class="validate-input-container pb-3">
         <input
-            type="text"
             class="form-control"
             :class="{'is-invalid': inputRef.error}"
             :value="inputRef.val"
             @blur="vaildateEmail"
             @input="updateValue"
+            v-bind="$attrs"
         />
         <span class="invalid-feedback" v-if="inputRef.error">
             {{ inputRef.message }}
@@ -24,6 +24,7 @@ export type IRulesProp = IRuleProp[] // ts别名
 const emailReg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
 export default defineComponent({
     name: 'VaildateInput',
+    inheritAttrs: false,
     props: {
         rules: Array as PropType<IRulesProp>,
         modelValue: String
