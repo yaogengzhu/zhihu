@@ -4,7 +4,7 @@
             class="form-control"
             :class="{'is-invalid': inputRef.error}"
             :value="inputRef.val"
-            @blur="vaildateEmail"
+            @blur="vaildateInput"
             @input="updateValue"
             v-bind="$attrs"
         />
@@ -15,7 +15,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive } from 'vue'
+import { defineComponent, PropType, reactive, onMounted } from 'vue'
+import { emitter } from './VaildateForm.vue'
 interface IRuleProp {
     type: 'required' | 'email'
     message: string
@@ -40,7 +41,7 @@ export default defineComponent({
             inputRef.val = targetValue
             context.emit('update:modelValue', targetValue)
         }
-        const vaildateEmail = () => {
+        const vaildateInput = () => {
             if (props.rules) {
                 const allPassed = props.rules.every((rule) => {
                     let passed = true
@@ -57,11 +58,17 @@ export default defineComponent({
                     return passed
                 })
                 inputRef.error = !allPassed
+                return allPassed
             }
+            return true
         }
+
+        onMounted(() => {
+            emitter.emit('form-item-callback', vaildateInput)
+        })
         return {
             inputRef,
-            vaildateEmail,
+            vaildateInput,
             updateValue
         }
     },

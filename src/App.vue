@@ -2,7 +2,7 @@
     <div class="container">
         <global-header :user="user"></global-header>
         <!-- <column-list :list="list"></column-list> -->
-        <form>
+        <vaildate-form @form-sumbit="onFormSubmit">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"
                     >Email address</label
@@ -12,6 +12,7 @@
                     v-model="emailVal"
                     class="demo"
                     placeholder="请输入邮箱地址"
+                    ref="inputRef"
                 />
                 {{ emailVal }}
             </div>
@@ -20,29 +21,30 @@
                 <label for="exampleInputEmail1" class="form-label"
                     >Email address</label
                 >
-                <input
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    v-model="emailRef.val"
-                    @blur="vaildateEmail"
+                <vaildate-input
+                    :rules="emailRules"
+                    v-model="emailVal"
+                    class="demo"
+                    placeholder="请输入邮箱地址"
+                    ref="inputRef"
                 />
-                <div class="form-text" v-if="emailRef.error">
-                    {{ emailRef.message }}
-                </div>
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label"
                     >Password</label
                 >
-                <input
-                    type="password"
-                    class="form-control"
-                    id="exampleInputPassword1"
+                <vaildate-input
+                    :rules="emailRules"
+                    v-model="emailVal"
+                    class="demo"
+                    placeholder="请输入邮箱地址"
+                    ref="inputRef"
                 />
             </div>
-        </form>
+            <template #submit>
+                <span class="btn btn-danger">sumit</span>
+            </template>
+        </vaildate-form>
     </div>
 </template>
 
@@ -52,6 +54,7 @@ import 'bootstrap/dist/css/bootstrap.min.css' //引入bootstrapcss
 import ColumnList, { IColumnListProps } from './components/ColumnList.vue'
 import GlobalHeader, { IUserProps } from './components/GlobalHeader.vue'
 import VaildateInput, { IRulesProp } from './components/VaildateInput.vue'
+import VaildateForm from './components/VaildateForm.vue'
 const testData: IColumnListProps[] = [
     {
         id: 1,
@@ -90,8 +93,10 @@ export default defineComponent({
         ColumnList,
         GlobalHeader,
         VaildateInput,
+        VaildateForm,
     },
     setup() {
+        const inputRef = ref<any>()
         const emailVal = ref('')
         const emailRules: IRulesProp = [
             {
@@ -115,6 +120,11 @@ export default defineComponent({
                 emailRef.message = 'email不能为空'
             }
         }
+        const onFormSubmit = (result: boolean) => {
+            console.log(inputRef.value)
+            inputRef.value.vaildateInput()
+            console.log(result)
+        }
         return {
             list: testData,
             user: currentUser,
@@ -122,6 +132,8 @@ export default defineComponent({
             vaildateEmail,
             emailRules,
             emailVal,
+            onFormSubmit,
+            inputRef,
         }
     },
 })
