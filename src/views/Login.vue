@@ -48,46 +48,20 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue';
-import ColumnList, { IColumnListProps } from '../components/ColumnList.vue';
-import GlobalHeader, { IUserProps } from '../components/GlobalHeader.vue'
-import VaildateInput, { IRulesProp } from '../components/VaildateInput.vue'
-import VaildateForm from './components/VaildateForm.vue'
-const testData: IColumnListProps[] = [
-    {
-        id: 1,
-        title: 'test1',
-        description:
-            '龙风的测试数据龙风的测试数据龙风的测试数据龙风的测试数据龙风的测试数据龙风的测试数据',
-        avatar: '',
-    },
-    {
-        id: 2,
-        title: 'test2',
-        description: '龙风的测试数据2',
-        avatar: 'https://avatars.githubusercontent.com/u/42566669?v=4',
-    },
-    {
-        id: 3,
-        title: 'test1',
-        description: '龙风的测试数据',
-        avatar: 'https://avatars.githubusercontent.com/u/42566669?v=4',
-    },
-    {
-        id: 4,
-        title: 'test2',
-        description: '龙风的测试数据2',
-        avatar: 'https://avatars.githubusercontent.com/u/42566669?v=4',
-    },
-];
+import { useRouter } from 'vue-router';
+import GlobalHeader, { IUserProps } from '../components/GlobalHeader.vue';
+import VaildateInput, { IRulesProp } from '../components/VaildateInput.vue';
+import VaildateForm from '../components/VaildateForm.vue';
+
 export default defineComponent({
     name: 'Login',
     components: {
-        ColumnList,
         GlobalHeader,
         VaildateInput,
         VaildateForm,
     },
     setup() {
+        const rouer = useRouter();
         const inputRef = ref<any>();
         const emailVal = ref('');
         const emailRules: IRulesProp = [
@@ -115,10 +89,15 @@ export default defineComponent({
         const onFormSubmit = (result: boolean) => {
             console.log(inputRef.value);
             inputRef.value.vaildateInput();
-            console.log(result);
+            // console.log(result);
+            rouer.push({
+                name: 'columnDetail',
+                params: {
+                    id: 1
+                }
+            })
         };
         return {
-            list: testData,
             emailRef,
             vaildateEmail,
             emailRules,

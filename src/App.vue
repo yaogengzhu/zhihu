@@ -24,7 +24,7 @@ import GlobalHeader, { IUserProps } from './components/GlobalHeader.vue'
 
 const currentUser: IUserProps = {
     id: 1,
-    isLogin: true,
+    isLogin: false,
     name: 'yaogengzhu',
 }
 export default defineComponent({
@@ -33,20 +33,6 @@ export default defineComponent({
         GlobalHeader,
     },
     setup() {
-        const inputRef = ref<any>()
-        const emailVal = ref('')
-        const emailRef = reactive({
-            val: '',
-            error: false,
-            message: '',
-        })
-        const vaildateEmail = () => {
-            // 验证数据
-            if (emailRef.val.trim() === '') {
-                emailRef.error = true
-                emailRef.message = 'email不能为空'
-            }
-        }
         return {
             user: currentUser,
         }
