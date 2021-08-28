@@ -49,14 +49,12 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import GlobalHeader, { IUserProps } from '../components/GlobalHeader.vue';
 import VaildateInput, { IRulesProp } from '../components/VaildateInput.vue';
 import VaildateForm from '../components/VaildateForm.vue';
 
 export default defineComponent({
     name: 'Login',
     components: {
-        GlobalHeader,
         VaildateInput,
         VaildateForm,
     },
