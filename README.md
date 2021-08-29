@@ -49,3 +49,19 @@ const useClickOutside = (elemetRef: Ref<HTMLElement | null>) => {
 
 export default useClickOutside
 ```
+
+### Vue3如何获取路由参数
+
+```js
+   setup() {
+        const route = useRoute()
+        const currentId = route.params.id // 获取当前路由参数
+        return {
+            route
+        }
+    }
+```
+### 全局对象的弊端
+- 数据不是响应式的
+- 数据改变不可被追踪
+- 不符组件开发态规则

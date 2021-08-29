@@ -11,7 +11,7 @@ export default defineComponent({
     name: 'ColumnDetail',
     setup() {
         const route = useRoute()
-
+        const currentId = route.params.id // 获取当前路由参数
         return {
             route
         }
